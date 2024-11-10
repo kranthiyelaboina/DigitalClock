@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Time Tracker</title>
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link 
+        rel="preconnect" 
+        href="https://fonts.gstatic.com" 
+        crossorigin>
+    <link 
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" 
+        rel="stylesheet">
+    <!-- Live Background Animation Script (Optional) -->
+    <!-- If using a JavaScript library like Particles.js, include it here -->
+    <!-- <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> -->
+</head>
+<body>
+    <!-- Live Background Container -->
+    <canvas id="backgroundAnimation"></canvas>
+
+    <div class="container">
+        <header>
+            <h1>Global Time Tracker</h1>
+            <div class="controls">
+                <select id="timezoneSelect" aria-label="Select Timezone">
+                    <option value="local">Your Local Time</option>
+                    <option value="UTC">UTC</option>
+                    <option value="America/New_York">New York</option>
+                    <option value="Europe/London">London</option>
+                    <option value="Asia/Tokyo">Tokyo</option>
+                    <option value="Australia/Sydney">Sydney</option>
+                    <!-- Add more time zones as needed -->
+                </select>
+                <button id="toggleFormat" aria-label="Toggle Time Format">Switch to 24-Hour</button>
+                <button id="toggleTheme" aria-label="Toggle Theme">Dark Mode</button>
+            </div>
+        </header>
+        <main>
+            <div class="clock-container">
+                <!-- Digital Clock -->
+                <div class="digital-clock" id="digitalClock" aria-label="Digital Clock">
+                    <span id="hours">00</span>:
+                    <span id="minutes">00</span>:
+                    <span id="seconds">00</span>
+                    <span id="amPm">AM</span>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2023 Global Time Tracker. All rights reserved.</p>
+            <p>Created by <strong>Kranthi Yelaboina</strong></p>
+        </footer>
+    </div>
+
+    <!-- Link to External JavaScript -->
+    <script src="script.js"></script>
+    <!-- Link to Background Animation Script (Optional) -->
+    <script src="background.js"></script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Root Variables for Theming */
+:root {
+    --primary-color: #4b6cb7;
+    --secondary-color: #182849;
+    --background-color: #f0f0f0;
+    --text-color: #ffffff;
+    --accent-color: #ffdd00;
+    --clock-bg: rgba(255, 255, 255, 0.25);
+}
+
+/* Dark Theme Variables */
+body.dark {
+    --primary-color: #ffdd00;
+    --secondary-color: #182849;
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --accent-color: #4b6cb7;
+    --clock-bg: rgba(0, 0, 0, 0.25);
+}
+
+/* Body Styling */
+body {
+    font-family: 'Roboto Slab', serif;
+    background: var(--background-color);
+    color: var(--text-color);
+    transition: background 0.5s, color 0.5s;
+    overflow: hidden; /* Prevent scrollbars from background animation */
+}
+
+/* Live Background Canvas */
+#backgroundAnimation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header Styling */
+header {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    animation: fadeInDown 1s ease-out;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.controls select,
+.controls button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Roboto Mono', monospace;
+}
+
+.controls select {
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+}
+
+.controls select:hover {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+.controls button {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+}
+
+.controls button:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+/* Main Content Styling */
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Clock Container */
+.clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--clock-bg);
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInUp 1s ease-out;
+    position: relative;
+}
+
+/* Digital Clock Styling */
+.digital-clock {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    display: flex;
+    gap: 10px;
+    position: relative;
+}
+
+.digital-clock span {
+    position: relative;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.digital-clock span::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-color);
+    bottom: -5px;
+    left: 0;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.digital-clock span.updated::after {
+    transform: scaleX(1);
+}
+
+.digital-clock span.updated {
+    color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+/* Analog Clock Styling */
+.analog-clock {
+    width: 350px;
+    height: 350px;
+    border: 10px solid var(--primary-color);
+    border-radius: 50%;
+    position: relative;
+    background: var(--clock-bg);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    transition: border-color 0.3s;
+}
+
+.clock-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the clock face */
+}
+
+.hand {
+    width: 50%;
+    height: 6px;
+    background: var(--primary-color);
+    position: absolute;
+    top: 50%;
+    left: 50%; /* Center horizontally */
+    transform-origin: 0% 50%; /* Pivot from the center */
+    transform: rotate(90deg);
+    transition: all 0.05s ease-in-out;
+    border-radius: 3px;
+}
+
+.hand::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    top: 50%;
+    left: 100%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    border-radius: 50%;
+}
+
+.hour-hand {
+    width: 40%;
+    height: 8px;
+    background: var(--secondary-color);
+}
+
+.minute-hand {
+    width: 50%;
+    height: 6px;
+    background: var(--primary-color);
+}
+
+.second-hand {
+    width: 60%;
+    height: 2px;
+    background: #ff4d4d;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1rem;
+    color: black; /* Black text in light mode */
+}
+
+body.dark footer {
+    color: white; /* White text in dark mode */
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(90deg);
+    }
+    to {
+        transform: rotate(450deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .analog-clock {
+        width: 300px;
+        height: 300px;
+    }
+
+    .digital-clock {
+        font-size: 3rem;
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    .controls select,
+    .controls button {
+        padding: 8px 15px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .analog-clock {
+        width: 250px;
+        height: 250px;
+    }
+
+    .digital-clock {
+        font-size: 2.5rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .controls select,
+    .controls button {
+        padding: 7px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .analog-clock {
+        width: 200px;
+        height: 200px;
+    }
+
+    .digital-clock {
+        font-size: 2rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .controls select,
+    .controls button {
+        width: 100%;
+    }
+}
